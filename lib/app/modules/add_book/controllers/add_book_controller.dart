@@ -46,9 +46,9 @@ class AddBookController extends GetxController {
               'tahun_terbit': int.parse(tahun_terbitController.text.toString()),
             });
         if (response.statusCode == 201) {
-          // await StorageProvider.write(StorageKey.status, 'logged');
-          // Get.offAllNamed(Routes.HOME);
-          Get.back();
+          await StorageProvider.write(StorageKey.status, 'success');
+          Get.offAllNamed(Routes.BOOK);
+          Get.snackbar('Berhasil', 'Buku telah disimpan', backgroundColor: Colors.green);
         } else {
           Get.snackbar('Sorry', 'Login Gagal', backgroundColor: Colors.orange);
         }
