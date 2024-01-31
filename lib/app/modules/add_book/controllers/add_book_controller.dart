@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:petugas_perpustakaan_kelas_c/app/modules/book/controllers/book_controller.dart';
 
 import '../../../data/contant/endpoint.dart';
 import '../../../data/provider/api_provider.dart';
@@ -17,6 +18,8 @@ class AddBookController extends GetxController {
   final loading = false.obs;
 
   final count = 0.obs;
+  final BookController _bookController = Get.find(); // untuk reload get data book
+
   @override
   void onInit() {
     super.onInit();
@@ -35,7 +38,7 @@ class AddBookController extends GetxController {
   addbook() async {
     loading(true);
     try {
-      FocusScope.of(Get.context!).unfocus();
+      FocusScope.of(Get.context!).unfocus(); //nge close keyboard
       formKey.currentState?.save();
       if (formKey.currentState!.validate()) {
         final response = await ApiProvider.instance().post(Endpoint.book,
@@ -46,9 +49,11 @@ class AddBookController extends GetxController {
               'tahun_terbit': int.parse(tahun_terbitController.text.toString()),
             });
         if (response.statusCode == 201) {
-          await StorageProvider.write(StorageKey.status, 'success');
-          Get.offAllNamed(Routes.BOOK);
-          Get.snackbar('Berhasil', 'Buku telah disimpan', backgroundColor: Colors.green);
+          _bookController.getData(); //untuk reload get data book
+          // await StorageProvider.write(StorageKey.status, 'success');
+          // Get.offAllNamed(Routes.BOOK);
+          // Get.snackbar('Berhasil', 'Buku telah disimpan', backgroundColor: Colors.green);
+          Get.back();
         } else {
           Get.snackbar('Sorry', 'Login Gagal', backgroundColor: Colors.orange);
         }
