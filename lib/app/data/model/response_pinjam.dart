@@ -48,7 +48,7 @@ class ResponsePinjam {
 class DataPinjam {
   DataPinjam({
       this.id, 
-      this.userId, 
+      this.userId,
       this.bookId, 
       this.tanggalPinjam, 
       this.tanggalKembali, 
@@ -71,8 +71,8 @@ class DataPinjam {
     book = json['book'] != null ? Book.fromJson(json['book']) : null;
   }
   int? id;
-  int? userId;
-  int? bookId;
+  String? userId;
+  String? bookId;
   String? tanggalPinjam;
   String? tanggalKembali;
   String? status;
@@ -133,11 +133,11 @@ class Book {
     updatedAt = json['updated_at'];
   }
   int? id;
-  int? kategoriId;
+  String? kategoriId;
   String? judul;
   String? penulis;
   String? penerbit;
-  int? tahunTerbit;
+  String? tahunTerbit;
   String? createdAt;
   String? updatedAt;
 

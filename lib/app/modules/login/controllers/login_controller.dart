@@ -1,11 +1,13 @@
 import 'dart:developer';
+
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:petugas_perpustakaan_kelas_c/app/data/contant/endpoint.dart';
-import 'package:petugas_perpustakaan_kelas_c/app/data/provider/api_provider.dart';
-import 'package:petugas_perpustakaan_kelas_c/app/data/provider/storage_provider.dart';
-import 'package:dio/dio.dart' as dio;
+
+import '../../../data/contant/endpoint.dart';
+import '../../../data/provider/api_provider.dart';
+import '../../../data/provider/storage_provider.dart';
 import '../../../routes/app_pages.dart';
 
 class LoginController extends GetxController {
@@ -24,7 +26,6 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-
     // cek status login jika sudah login akan di redirect ke menu home
     String status = StorageProvider.read(StorageKey.status);
     log('status : $status');
